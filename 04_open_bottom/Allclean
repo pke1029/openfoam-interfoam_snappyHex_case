@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# delete timestep
+foamListTimes -rm
+
+# delete processor* directory
+rm -r processor*
+
+# delete log
+rm interFoam.log
