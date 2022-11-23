@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# generate mesh
+blockMesh 
+
+# extract surface feature
+surfaceFeatureExtract
+
+# generate refined mesh and move output to ./mesh directory 
+# 0.005 contains output of castellatedMesh
+# 0.01 contains output of snap
+snappyHexMesh
+mkdir mesh 
+mv 0.005 mesh/0.005 
+mv 0.01 mesh/0.01
+rm -r constant/polyMesh
+cp -r mesh/0.01/polyMesh constant/polyMesh
+
+# copy alpha.water.orig
+cp ./0/alpha.water.orig ./0/alpha.water
+
+# setfields
+setFields
+
+# solve
+interFoam | tee interFoam.log
