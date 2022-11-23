@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# generate mesh
+blockMesh 
+
+# copy alpha.water.orig
+cp ./0/alpha.water.orig ./0/alpha.water
+
+# setfields
+setFields
+
+# solve
+interFoam | tee interFoam.log
