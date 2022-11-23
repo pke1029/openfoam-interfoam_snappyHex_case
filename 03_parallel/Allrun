@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# generate mesh
+blockMesh 
+
+# copy alpha.water.orig
+cp ./0/alpha.water.orig ./0/alpha.water
+
+# setfields
+setFields
+
+# decompose domain
+decomposePar
+
+# solve
+# interFoam | tee interFoam.log
+mpirun -np 3 interFoam -parallel | tee interFoam.log
+
+# reconstruct domain
+reconstructPar
