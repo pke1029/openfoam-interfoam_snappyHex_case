@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# delete timestep
+foamListTimes -rm
+
+# delete processor* directory
+rm -r processor*
+
+# delete surface feature
+rm -r constant/extendedFeatureEdgeMesh
+rm constant/triSurface/soil.eMesh
+
+# delete snappy output
+rm -r mesh
+rm -r constant/polyMesh
+
+# delete log
+rm interFoam.log
